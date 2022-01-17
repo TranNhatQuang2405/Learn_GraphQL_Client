@@ -1,16 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
-// import { GetBooks } from "../graphql_client";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { GetBooks } from "../graphql_client";
 
-const initialState = {
-    // books: GetBooks,
-};
+//Thunk
+export const fecthBookAPI = createAsyncThunk("book/fill", async () => {
+    //Giả lập đường truyền mạng
+    const data = await new Promise((resolve) =>
+        setTimeout(() => resolve(GetBooks()), 2000)
+    );
+    return data;
+});
 
+const initialState = { books: [], pending: false };
 export const bookSlice = createSlice({
     name: "book",
     initialState,
     reducers: {
         add: (state) => {},
         load: (state) => {},
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fecthBookAPI.pending, (state, action) => {
+            state.pending = true;
+        });
+        builder.addCase(fecthBookAPI.fulfilled, (state, action) => {
+            state.books = [...action.payload];
+            state.pending = false;
+        });
     },
 });
 

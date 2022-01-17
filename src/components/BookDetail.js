@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+
 function BookDetail() {
     return (
         <Card bg="info" text="white" className="shadow">
