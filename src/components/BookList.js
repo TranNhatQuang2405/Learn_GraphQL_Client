@@ -4,8 +4,8 @@ import { Row, Col, Card } from "react-bootstrap";
 import BookDetail from "./BookDetail";
 import { useSelector } from "react-redux";
 function BookList() {
-    const books = useSelector((state) => state.ManageBooks.books);
-    const pending = useSelector((state) => state.ManageBooks.pending);
+    const books = useSelector((state) => state.All.books);
+    const pending = useSelector((state) => state.All.pending);
 
     return (
         <Row>
