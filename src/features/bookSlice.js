@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { GetBooks } from "../graphql_client";
+import { GetBookByID, AddBook } from "../graphql_client";
 
 const initialState = {
     name: "",
@@ -11,13 +11,15 @@ export const bookSlice = createSlice({
     initialState,
     reducers: {
         add: (state, payload) => {
-            console.log(payload);
+            AddBook(payload);
         },
-        set: (state, payload) => {},
+        get: (state, payload) => {
+            GetBookByID(payload);
+        },
     },
 });
 
 // Action creators are generated for each case reducer function
-export const { add, set } = bookSlice.actions;
+export const { add, get } = bookSlice.actions;
 
 export default bookSlice.reducer;

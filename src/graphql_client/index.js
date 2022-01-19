@@ -1,4 +1,4 @@
-import { getBooks, getAuthors } from "./queries";
+import { getBooks, getAuthors, addBook, getBookByID } from "./queries";
 import { request } from "graphql-request";
 
 const URL_API = process.env.REACT_APP_URL_API;
@@ -14,7 +14,18 @@ export const GetBooks = async () => {
     return result.books;
 };
 
+export const GetBookByID = async ({ payload }) => {
+    console.log(payload);
+    const result = await request(URL_API, getBookByID, payload);
+    console.log(result);
+    return result;
+};
 export const GetAuthors = async () => {
     const result = await request(URL_API, getAuthors);
     return result.authors;
+};
+export const AddBook = async ({ payload }) => {
+    const result = await request(URL_API, addBook, payload);
+    console.log(result);
+    return result;
 };
