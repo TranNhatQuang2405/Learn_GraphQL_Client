@@ -25,6 +25,7 @@ export const GetAuthors = async () => {
     return result.authors;
 };
 export const AddBook = async ({ payload }) => {
+    console.log(payload);
     const result = await request(URL_API, addBook, payload);
     console.log(result);
     return result;

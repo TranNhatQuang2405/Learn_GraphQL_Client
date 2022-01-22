@@ -11,7 +11,7 @@ function BookList() {
 
     const handleClick = (e) => {
         const id = e.currentTarget.dataset.id;
-        dispatch(get({ id: id }));
+        dispatch(get({ authorId: id }));
     };
     return (
         <Row>
