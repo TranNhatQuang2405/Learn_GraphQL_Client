@@ -15,8 +15,12 @@ export const AllSlice = createSlice({
     name: "all",
     initialState,
     reducers: {
-        add: (state) => {},
-        load: (state) => {},
+        add: (state) => {
+            state.pending = false;
+        },
+        load: (state) => {
+            state.pending = true;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fecthAllAPI.pending, (state, action) => {

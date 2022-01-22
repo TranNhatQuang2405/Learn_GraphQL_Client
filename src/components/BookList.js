@@ -1,17 +1,16 @@
 // @ts-nocheck
-import React from "react";
+import React, { memo } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import BookDetail from "./BookDetail";
 import { useSelector, useDispatch } from "react-redux";
-import { get } from "../features/bookSlice";
+import { getBookByID } from "../features/bookSlice";
 function BookList() {
     const books = useSelector((state) => state.All.books);
     const pending = useSelector((state) => state.All.pending);
     const dispatch = useDispatch();
-
     const handleClick = (e) => {
         const id = e.currentTarget.dataset.id;
-        dispatch(get({ authorId: id }));
+        dispatch(getBookByID({ authorId: id }));
     };
     return (
         <Row>
@@ -43,4 +42,4 @@ function BookList() {
     );
 }
 
-export default BookList;
+export default memo(BookList);

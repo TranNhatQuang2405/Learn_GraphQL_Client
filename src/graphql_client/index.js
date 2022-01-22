@@ -14,19 +14,15 @@ export const GetBooks = async () => {
     return result.books;
 };
 
-export const GetBookByID = async ({ payload }) => {
-    console.log(payload);
+export const GetBookByID = async (payload) => {
     const result = await request(URL_API, getBookByID, payload);
-    console.log(result);
     return result;
 };
 export const GetAuthors = async () => {
     const result = await request(URL_API, getAuthors);
     return result.authors;
 };
-export const AddBook = async ({ payload }) => {
-    console.log(payload);
+export const AddBook = async (payload) => {
     const result = await request(URL_API, addBook, payload);
-    console.log(result);
     return result;
 };

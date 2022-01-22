@@ -1,11 +1,13 @@
 // @ts-nocheck
-import React from "react";
+import React, { memo } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { add } from "../features/bookSlice";
+import { addBook } from "../features/bookSlice";
+import { fecthAllAPI } from "../features/AllSlice";
+
 function Forms() {
-    const inputBook = useSelector((state) => state.Book);
+    const inputBook = useSelector((state) => state.Book.input);
     const authors = useSelector((state) => state.All.authors);
     const [book, setBook] = useState(inputBook);
     const dispatch = useDispatch();
@@ -13,9 +15,11 @@ function Forms() {
     const handleChange = (e) => {
         setBook((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(add(book));
+        await dispatch(addBook(book));
+        setBook(inputBook);
+        await dispatch(fecthAllAPI());
     };
     return (
         <Row>
@@ -92,9 +96,4 @@ function Forms() {
     );
 }
 
-export default Forms;
-// {data.authors.map((author) => (
-//     <option key={author.id} value={author.id}>
-//         {author.name}
-//     </option>
-// ))}
+export default memo(Forms);

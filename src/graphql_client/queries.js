@@ -33,8 +33,17 @@ const addBook = gql`
 const getBookByID = gql`
     query getBookByID($authorId: ID!) {
         book(id: $authorId) {
+            id
             name
             genre
+            author {
+                id
+                name
+                age
+                books {
+                    name
+                }
+            }
         }
     }
 `;
